@@ -1,12 +1,17 @@
 #!/bash/bin
 
-cd ./logs
+cd ./log
 
-regex "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b"
+regex="\b([0-9]{1,3}\.){3}[0-9]{1,3}\b"
+
 
 if [[ $1 =~ $regex ]]
 then
         cat access.log | grep $1
+			if [ $? -ne 0 ]
+			then
+    			echo "O endereço IP procurado não está presente no arquivo"
+			fi
 else
         echo "Formato não é válido"
 fi
